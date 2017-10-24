@@ -1,0 +1,65 @@
+﻿namespace UriJudge.Console
+{
+    using System;
+    using System.Collections.Generic;
+
+    class URI
+    {
+        static void Main(string[] args)
+        {
+            var loop = true;
+            var lst = new List<string>();
+            while (loop)
+            {
+                var n = int.Parse(Console.ReadLine().Trim());
+                if (n == 0)
+                {
+                    loop = false;
+                }
+                else
+                {
+                    var line = Console.ReadLine();
+                    var r = Decode(line);
+                    lst.Add(r);
+                }
+            }
+
+            lst.ForEach(Console.WriteLine);
+        }
+
+        public static string Decode(string encodedText)
+        {
+            var originalText = new char?[encodedText.Length];
+            var readPosition = 0;
+
+            //Efetua uma busca em profundidade
+            var stack = new Stack<int>();
+            stack.Push(0);
+
+            while (stack.Count > 0)
+            {
+                var currentNode = stack.Peek();
+
+                var leftNode = 2 * currentNode + 1;
+                var rightNode = 2 * currentNode + 2;
+
+                if (leftNode < originalText.Length && originalText[leftNode] == null)
+                {
+                    stack.Push(leftNode);
+                }
+                else
+                {
+                    originalText[currentNode] = encodedText[readPosition++];
+                    stack.Pop();
+
+                    if (rightNode < originalText.Length && originalText[rightNode] == null)
+                    {
+                        stack.Push(rightNode);
+                    }
+                }
+            }
+
+            return string.Join(string.Empty, originalText);
+        }
+    }
+}
