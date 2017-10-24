@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Problem1022\TdaRacional.cs" />
+    <Compile Include="Problem1068\BalanceParentheses.cs" />
     <Compile Include="Problem1083\Helper.cs" />
     <Compile Include="Problem1083\LexicalAnalyzer.cs" />
     <Compile Include="Problem1083\LexicalException.cs" />
@@ -51,6 +53,19 @@
     <Compile Include="Problem1083\SyntaxException.cs" />
     <Compile Include="Problem1083\Token.cs" />
     <Compile Include="Problem1083\TokenType.cs" />
+    <Compile Include="Problem1110\ThrowingCardsAway.cs" />
+    <Compile Include="Problem1215\AndyDictionary.cs" />
+    <Compile Include="Problem1244\SortBySize.cs" />
+    <Compile Include="Problem1259\EvenAndOdd.cs" />
+    <Compile Include="Problem1405\Commands\Add.cs" />
+    <Compile Include="Problem1405\Commands\Call.cs" />
+    <Compile Include="Problem1405\Commands\Command.cs" />
+    <Compile Include="Problem1405\Commands\Return.cs" />
+    <Compile Include="Problem1405\Commands\Sub.cs" />
+    <Compile Include="Problem1405\Operating\Constant.cs" />
+    <Compile Include="Problem1405\Operating\IOperating.cs" />
+    <Compile Include="Problem1405\Operating\Variable.cs" />
+    <Compile Include="Problem1405\Program.cs" />
     <Compile Include="Problem2671\BinaryTreeEncoder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

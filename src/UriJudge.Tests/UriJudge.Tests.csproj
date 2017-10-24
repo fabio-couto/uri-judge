@@ -53,7 +53,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Problem1022Tests.cs" />
     <Compile Include="Problem1038Tests.cs" />
+    <Compile Include="Problem1068Tests.cs" />
+    <Compile Include="Problem1110Tests.cs" />
+    <Compile Include="Problem1215Tests.cs" />
+    <Compile Include="Problem1244Tests.cs" />
+    <Compile Include="Problem1259Tests.cs" />
+    <Compile Include="Problem1405Tests.cs" />
     <Compile Include="Problem2671Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
