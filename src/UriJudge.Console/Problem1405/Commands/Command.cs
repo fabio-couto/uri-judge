@@ -5,6 +5,11 @@
     /// </summary>
     public abstract class Command
     {
-        public abstract void Execute(Program program);
+        /// <summary>
+        /// Executa a implementação do comando
+        /// </summary>
+        /// <param name="program">Referência para o contexto do programa em execução</param>
+        /// <returns>True se a execução deve continuar, False em caso de fim de execução (Retorno)</returns>
+        public abstract bool Execute(Program program);
     }
 }

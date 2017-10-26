@@ -7,12 +7,14 @@ namespace UriJudge.Console.Problem1405.Commands
     /// </summary>
     public class Call : Command
     {
-        public IOperating Operating;
+        public IOperating Operating { get; set; }
 
-        public override void Execute(Program program)
+        public override bool Execute(Program program)
         {
-            var result = new Program().Execute(Operating.GetValue());
-            program.SetReturnValue(result, false);
+            var r0 = Operating.GetValue(program);
+            var result = program.Clone().Start(r0);
+            program.SetReturnValue(result);
+            return true;
         }
     }
 }

@@ -5,6 +5,6 @@
     /// </summary>
     public interface IOperating
     {
-        int GetValue();
+        int GetValue(Program program);
     }
 }

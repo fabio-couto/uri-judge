@@ -1,65 +1,56 @@
 ﻿namespace UriJudge.Console
 {
+    using Problem1405;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Text;
 
     class URI
     {
         static void Main(string[] args)
         {
-            var loop = true;
-            var lst = new List<string>();
-            while (loop)
+            var output = new List<string>();
+
+            var file = new StreamReader(@"C:\Users\Fábio\Desktop\parada.in");
+
+            do
             {
-                var n = int.Parse(Console.ReadLine().Trim());
-                if (n == 0)
+                var input = file.ReadLine().Split(' ');
+                var l = int.Parse(input[0]);
+                var n = int.Parse(input[1]);
+
+                if (l == 0 && n == 0)
+                    break;
+
+                var program = new StringBuilder();
+
+                while (l > 0)
                 {
-                    loop = false;
+                    program.AppendLine(file.ReadLine());
+                    l--;
                 }
-                else
+
+                var p = Parser.Parse(program.ToString());
+
+                try
                 {
-                    var line = Console.ReadLine();
-                    var r = Decode(line);
-                    lst.Add(r);
+                    Program.halting.Clear();
+                    output.Add(p.Start(n).ToString());
                 }
-            }
+                catch (InfiniteLoopException)
+                {
+                    output.Add("*");
+                }
 
-            lst.ForEach(Console.WriteLine);
-        }
+            } while (true);
 
-        public static string Decode(string encodedText)
-        {
-            var originalText = new char?[encodedText.Length];
-            var readPosition = 0;
-
-            //Efetua uma busca em profundidade
-            var stack = new Stack<int>();
-            stack.Push(0);
-
-            while (stack.Count > 0)
+            output.ForEach(x =>
             {
-                var currentNode = stack.Peek();
-
-                var leftNode = 2 * currentNode + 1;
-                var rightNode = 2 * currentNode + 2;
-
-                if (leftNode < originalText.Length && originalText[leftNode] == null)
-                {
-                    stack.Push(leftNode);
-                }
-                else
-                {
-                    originalText[currentNode] = encodedText[readPosition++];
-                    stack.Pop();
-
-                    if (rightNode < originalText.Length && originalText[rightNode] == null)
-                    {
-                        stack.Push(rightNode);
-                    }
-                }
-            }
-
-            return string.Join(string.Empty, originalText);
+                Debug.WriteLine(x);
+                Console.WriteLine(x);
+            });
         }
     }
 }

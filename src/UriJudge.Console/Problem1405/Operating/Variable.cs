@@ -5,23 +5,16 @@
     /// </summary>
     public class Variable : IOperating
     {
-        private readonly Program _program;
-        public readonly int _index;
+        public int Index { get; private set; }
         
-        public Variable(Program program, int index)
+        public Variable(int index)
         {
-            _program = program;
-            _index = index;
+            Index = index;
         }
 
-        public int GetValue()
+        public int GetValue(Program program)
         {
-            return _program.ReadVar(_index);
-        }
-
-        public int GetIndex()
-        {
-            return _index;
+            return program.ReadVar(Index);
         }
     }
 }

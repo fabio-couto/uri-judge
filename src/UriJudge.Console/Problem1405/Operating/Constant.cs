@@ -5,16 +5,16 @@
     /// </summary>
     public class Constant : IOperating
     {
-        private readonly int _value;
+        public int Value { get; private set; }
 
         public Constant(int value)
         {
-            _value = value;
+            Value = value;
         }
 
-        public int GetValue()
+        public int GetValue(Program program)
         {
-            return _value;
+            return Value;
         }
     }
 }
