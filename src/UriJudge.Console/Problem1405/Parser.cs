@@ -49,7 +49,7 @@ namespace UriJudge.Console.Problem1405
                     }
                 }
 
-                return new Program(commands);
+                return new Program(commands, new Dictionary<int, int?>());
             }
         }
 

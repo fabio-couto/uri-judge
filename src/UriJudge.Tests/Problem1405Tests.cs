@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Text;
 using UriJudge.Console.Problem1405;
 
@@ -152,7 +153,7 @@ namespace UriJudge.Tests
         }
 
         [TestMethod]
-        public void Teste()
+        public void TesteFibonacci()
         {
             var program = new StringBuilder();
             program.AppendLine("IFLE R0,1");
@@ -171,6 +172,7 @@ namespace UriJudge.Tests
             var p = Parser.Parse(program.ToString());
 
             Assert.AreEqual(987, p.Start(16));
+            Assert.AreEqual(867, p.Start(256));
         }
     }
 }

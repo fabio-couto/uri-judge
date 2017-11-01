@@ -10,8 +10,6 @@ namespace UriJudge.Console.Problem1405
     /// </summary>
     public class Program
     {
-        public static StringBuilder halting = new StringBuilder();
-
         /// <summary>
         /// Lista de comandos que compõem o programa
         /// </summary>
@@ -22,10 +20,16 @@ namespace UriJudge.Console.Problem1405
         /// </summary>
         private readonly int[] _variables;
 
-        public Program(ICollection<Command> commands)
+        /// <summary>
+        /// Dicionário para verificação de loop infinito
+        /// </summary>
+        private readonly IDictionary<int, int?> _haltingControl;
+
+        public Program(ICollection<Command> commands, IDictionary<int, int?> haltingControl)
         {
             _commands = commands;
             _variables = new int[10];
+            _haltingControl = haltingControl;
         }
 
         /// <summary>
@@ -35,23 +39,21 @@ namespace UriJudge.Console.Problem1405
         /// <returns>O valor calculado pelo programa</returns>
         public int Start(int r0)
         {
-            _variables[0] = r0;
-            //_commands.ExecuteAll(this);
-
-            var count = 1;
-            foreach (var c in _commands)
+            if (_haltingControl.ContainsKey(r0))
             {
-                if (c is Call)
-                {
-                    halting.AppendFormat("\"{0} ->  Call {1}\"\n", r0, count);
-                }
+                if (_haltingControl[r0] == null)
+                    throw new InfiniteLoopException();
 
-                if (!c.Execute(this))
-                    break;
-
-                count++;
+                return _haltingControl[r0].Value;
+            }
+            else
+            {
+                _haltingControl.Add(r0, null);
             }
 
+            _variables[0] = r0;
+            _commands.ExecuteAll(this);
+            _haltingControl[r0] = _variables[9];
             return _variables[9];
         }
 
@@ -90,7 +92,7 @@ namespace UriJudge.Console.Problem1405
         /// <returns>Novo programa, com novo contexto de variáveis</returns>
         public Program Clone()
         {
-            return new Program(_commands);
+            return new Program(_commands, _haltingControl);
         }
 
         /// <summary>
